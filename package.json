@@ -1,0 +1,19 @@
+{
+  "name": "topic",
+  "description": "",
+  "version": "0.0.0",
+  "main": "topic.js",
+  "devDependencies": {
+    "chai": "*",
+    "mocha": "*"
+  },
+  "scripts": {
+    "test": "mocha --no-timeouts --recursive"
+  },
+  "dependencies": {
+    "bluebird": "^3.0.6",
+    "lodash": "^3.10.1",
+    "nalapa": "^1.7.0",
+    "underscore.string": "^3.2.2"
+  }
+}
