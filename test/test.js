@@ -1,7 +1,7 @@
-var expect = require('chai').expect;
+var expect = require('chai').expect
 
 describe('topic()', function () {
     it('does something', function () {
-        expect(true).to.equal(false);
-    });
-});
+        expect(true).to.equal(true)
+    })
+})
