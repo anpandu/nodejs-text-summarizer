@@ -13,6 +13,7 @@ var s = require("underscore.string")
 
 var Helper = require('./Helper.js')
 var sim1 = require('./WordFormSimilarity.js')
+var sim2 = require('./WordSemanticSimilarity.js')
 
 /**
  * @param {}
@@ -21,9 +22,7 @@ var sim1 = require('./WordFormSimilarity.js')
  */
 var Processor = function () {}
 
-
-Processor.prototype.addWordFormSimilarity = function(sentences) {
-
+Processor.prototype.addWords = function(sentences) {
   var sentences = _.chain(sentences)
     .map(function (sentence) {
       var res = {}
@@ -38,8 +37,11 @@ Processor.prototype.addWordFormSimilarity = function(sentences) {
       return res
     })
     .value()
+  return sentences
+}
 
-  sentences = _.chain(sentences)
+Processor.prototype.addWordFormSimilarity = function(sentences) {
+  var sentences = _.chain(sentences)
     .map(function (sentence) {
       sentence['word_form_similarity'] = _.chain(sentences)
         .map(function (item) { return sim1(item['words'], sentence['words']) })
@@ -47,9 +49,21 @@ Processor.prototype.addWordFormSimilarity = function(sentences) {
         .value()
       return sentence
     })
-    .map(function (sentence) { delete sentence['words']; return sentence })
     .value()
 
+  return sentences
+}
+
+Processor.prototype.addWordSemanticSimilarity = function(sentences) {
+  var sentences = _.chain(sentences)
+    .map(function (sentence) {
+      sentence['word_semantic_similarity'] = _.chain(sentences)
+        .map(function (item) { return sim2(item['words'], sentence['words']) })
+        .reduce(function(total, n) { return total + n })
+        .value()
+      return sentence
+    })
+    .value()
   return sentences
 }
 
