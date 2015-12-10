@@ -14,6 +14,7 @@
     "bluebird": "^3.0.6",
     "lodash": "^3.10.1",
     "nalapa": "^1.7.0",
+    "natural": "^0.2.1",
     "underscore.string": "^3.2.2"
   }
 }
