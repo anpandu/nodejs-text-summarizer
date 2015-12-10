@@ -16,6 +16,11 @@ describe('Cleaner', function () {
     	var result = cleaner.fixDotBetweenSentences(text, ' ')
         expect(result).to.equal(answer)
 
+        var text = 'Maroef SjamsoeddiN.\"Nama kami disebut'
+        var answer = 'Maroef SjamsoeddiN. \"Nama kami disebut'
+        var result = cleaner.fixDotBetweenSentences(text, ' ')
+        expect(result).to.equal(answer)
+
     	var text = 'kata Fahri.Menurut Fahri'
     	var answer = 'kata Fahri. Menurut Fahri'
     	var result = cleaner.fixDotBetweenSentences(text, ' ')

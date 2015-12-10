@@ -19,7 +19,9 @@ Cleaner.prototype.replaceNonASCII = function(text, word) {
 }
 
 Cleaner.prototype.fixDotBetweenSentences = function(text) {
-  return text.replace(/([a-z0-9\"]\.)([A-Z\"])/g, "$1 $2")
+  return text
+  	.replace(/([a-z0-9\"]\.)([A-Z\"])/g, "$1 $2")
+  	.replace(/([A-Z]\.)\"/g, "$1 \"")
 }
 
 /**
