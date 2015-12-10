@@ -23,6 +23,10 @@ var sim3 = require('./WordOrderSimilarity.js')
  */
 var Processor = function () {}
 
+Processor.prototype.lambda1 = 0.8
+Processor.prototype.lambda2 = 0.1 
+Processor.prototype.lambda3 = 0.1
+
 Processor.prototype.addWords = function(sentences) {
   var sentences = _.chain(sentences)
     .map(function (sentence) {
@@ -75,6 +79,19 @@ Processor.prototype.addWordOrderSimilarity = function(sentences) {
         .map(function (item) { return sim3(item['words'], sentence['words']) })
         .reduce(function(total, n) { return total + n })
         .value()
+      return sentence
+    })
+    .value()
+  return sentences
+}
+
+Processor.prototype.addTotalScore = function(sentences) {
+  var sentences = _.chain(sentences)
+    .map(function (sentence) {
+      var a = Processor.prototype.lambda1 * sentence['word_form_similarity']
+      var b = Processor.prototype.lambda2 * sentence['word_semantic_similarity']
+      var c = Processor.prototype.lambda3 * sentence['word_order_similarity']
+      sentence['total_score'] = a + b + c
       return sentence
     })
     .value()
