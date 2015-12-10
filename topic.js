@@ -32,9 +32,11 @@ var topic = function () {
   content = Cleaner.fixDotBetweenSentences(content)
 
   var sentences = tokenizer.splitSentence(content)
+  
   sentences = Processor.addWords(sentences)
   sentences = Processor.addWordFormSimilarity(sentences)
   sentences = Processor.addWordSemanticSimilarity(sentences)
+  sentences = Processor.deleteWords(sentences)
 
   sentences = _.chain(sentences).sortBy(function(a) { return a['word_semantic_similarity'] }).value()
   console.log(sentences)

@@ -67,6 +67,13 @@ Processor.prototype.addWordSemanticSimilarity = function(sentences) {
   return sentences
 }
 
+Processor.prototype.deleteWords = function(sentences) {
+  var sentences = _.chain(sentences)
+    .map(function (sentence) { delete sentence['words']; return sentence })
+    .value()
+  return sentences
+}
+
 /**
  * Module exports
  */

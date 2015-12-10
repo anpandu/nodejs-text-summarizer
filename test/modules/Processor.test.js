@@ -46,6 +46,7 @@ describe('Processor', function () {
     var result = sentences
     result = pro.addWords(result)
     result = pro.addWordFormSimilarity(result)
+    result = pro.deleteWords(result)
     assert(_.isEqual(result, ans))
   })
 
@@ -78,6 +79,7 @@ describe('Processor', function () {
     var result = sentences
     result = pro.addWords(result)
     result = pro.addWordSemanticSimilarity(result)
+    result = pro.deleteWords(result)
     assert(_.isEqual(result, ans))
   })
 
