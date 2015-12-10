@@ -23,9 +23,9 @@ var sim3 = require('./WordOrderSimilarity.js')
  */
 var Processor = function () {}
 
-Processor.prototype.lambda1 = 0.8
+Processor.prototype.lambda1 = 0.4
 Processor.prototype.lambda2 = 0.1 
-Processor.prototype.lambda3 = 0.1
+Processor.prototype.lambda3 = 0.5
 
 Processor.prototype.addWords = function(sentences) {
   var sentences = _.chain(sentences)
