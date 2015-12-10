@@ -36,9 +36,10 @@ var topic = function () {
   sentences = Processor.addWords(sentences)
   sentences = Processor.addWordFormSimilarity(sentences)
   sentences = Processor.addWordSemanticSimilarity(sentences)
+  sentences = Processor.addWordOrderSimilarity(sentences)
   sentences = Processor.deleteWords(sentences)
 
-  sentences = _.chain(sentences).sortBy(function(a) { return a['word_semantic_similarity'] }).value()
+  sentences = _.chain(sentences).sortBy(function(a) { return a['word_order_similarity'] }).value()
   console.log(sentences)
   // console.log(JSON.stringify(sentences))
 }

@@ -14,6 +14,7 @@ var s = require("underscore.string")
 var Helper = require('./Helper.js')
 var sim1 = require('./WordFormSimilarity.js')
 var sim2 = require('./WordSemanticSimilarity.js')
+var sim3 = require('./WordOrderSimilarity.js')
 
 /**
  * @param {}
@@ -67,9 +68,25 @@ Processor.prototype.addWordSemanticSimilarity = function(sentences) {
   return sentences
 }
 
+Processor.prototype.addWordOrderSimilarity = function(sentences) {
+  var sentences = _.chain(sentences)
+    .map(function (sentence) {
+      sentence['word_order_similarity'] = _.chain(sentences)
+        .map(function (item) { return sim3(item['words'], sentence['words']) })
+        .reduce(function(total, n) { return total + n })
+        .value()
+      return sentence
+    })
+    .value()
+  return sentences
+}
+
 Processor.prototype.deleteWords = function(sentences) {
   var sentences = _.chain(sentences)
-    .map(function (sentence) { delete sentence['words']; return sentence })
+    .map(function (sentence) {
+      delete sentence['words']
+      return sentence 
+    })
     .value()
   return sentences
 }
