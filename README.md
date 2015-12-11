@@ -1,13 +1,13 @@
 # nodejs-text-summarizer
 
-[![Build Status](https://secure.travis-ci.org/user/topic.png?branch=master)](http://travis-ci.org/anpandu/nodejs-text-summarizer)
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 
 
 ## Installation
 
 Install with npm:
 
-```
+```sh
 npm install --save nodejs-text-summarizer
 ```
 
@@ -36,6 +36,17 @@ var result2 = sum_id(text2)
 
 From the repo root:
 
-```
+```sh
 npm test
 ```
+
+## License
+
+MIT © [Ananta Pandu](pandu.ml)
+
+[npm-image]: https://badge.fury.io/js/nodejs-text-summarizer.svg
+[npm-url]: https://npmjs.org/package/nodejs-text-summarizer
+[travis-image]: https://travis-ci.org/anpandu/nodejs-text-summarizer.svg?branch=master
+[travis-url]: https://travis-ci.org/anpandu/nodejs-text-summarizer
+[daviddm-image]: https://david-dm.org/anpandu/nodejs-text-summarizer.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/anpandu/nodejs-text-summarizer
