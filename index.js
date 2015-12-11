@@ -1,4 +1,4 @@
-/*! topic v0.0.0 - MIT license */
+/*! nodejs-text-summarizer v1.0.0 - MIT license */
 
 'use strict';
 
@@ -19,13 +19,12 @@ var Processor = require('./modules/Processor.js')
  */
 
 var sumID = function (content) {
-  
   var text = content
   text = Cleaner.replaceNonASCII(text, ' ')
   text = Cleaner.fixDotBetweenSentences(text)
-
   var sentences = tokenizer.splitSentence(text)
   
+  Processor.setLanguage('ID')
   sentences = Processor.addWords(sentences)
   sentences = Processor.addWordFormSimilarity(sentences)
   sentences = Processor.addWordSemanticSimilarity(sentences)
@@ -34,6 +33,29 @@ var sumID = function (content) {
   sentences = Processor.deleteWords(sentences)
 
   sentences = _.chain(sentences).sortBy(function(a) { return a['total_score'] }).value()
+  console.log(sentences)
+  if (sentences.length>0)
+    return sentences[sentences.length-1]['text']
+  else
+    return ''
+}
+
+var sumEN = function (content) {
+  var text = content
+  text = Cleaner.replaceNonASCII(text, ' ')
+  text = Cleaner.fixDotBetweenSentences(text)
+  var sentences = tokenizer.splitSentence(text)
+  
+  Processor.setLanguage('EN')
+  sentences = Processor.addWords(sentences)
+  sentences = Processor.addWordFormSimilarity(sentences)
+  sentences = Processor.addWordSemanticSimilarity(sentences)
+  sentences = Processor.addWordOrderSimilarity(sentences)
+  sentences = Processor.addTotalScore(sentences)
+  sentences = Processor.deleteWords(sentences)
+
+  sentences = _.chain(sentences).sortBy(function(a) { return a['total_score'] }).value()
+  console.log(sentences)
   if (sentences.length>0)
     return sentences[sentences.length-1]['text']
   else
@@ -46,5 +68,6 @@ var sumID = function (content) {
  */
 
 module.exports = {
-  ID: sumID
+  ID: sumID,
+  EN: sumEN
 }

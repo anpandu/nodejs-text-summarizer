@@ -3,10 +3,18 @@ var helper = require('../../modules/Helper.js')
 
 describe('Helper', function () {
 
-  it('isStopWord', function () {
-    expect(helper.isStopWord('untuk')).to.equal(true)
-    expect(helper.isStopWord('Untuk')).to.equal(true)
-    expect(helper.isStopWord('asdasdasdasdasd')).to.equal(false)
+  it('isStopWord (EN)', function () {
+    var language = helper.LANG.EN
+    expect(helper.isStopWord(language, 'haven\'t')).to.equal(true)
+    expect(helper.isStopWord(language, 'Haven\'t')).to.equal(true)
+    expect(helper.isStopWord(language, 'asdasdasdasdasd')).to.equal(false)
+  })
+
+  it('isStopWord (ID)', function () {
+    var language = helper.LANG.ID
+    expect(helper.isStopWord(language, 'untuk')).to.equal(true)
+    expect(helper.isStopWord(language, 'Untuk')).to.equal(true)
+    expect(helper.isStopWord(language, 'asdasdasdasdasd')).to.equal(false)
   })
 
   it('isPunctuation', function () {

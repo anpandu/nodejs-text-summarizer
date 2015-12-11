@@ -1,4 +1,4 @@
-/*! nodejs-text-summarizer v1.0.0 - MIT license */
+/*! nodejs-text-summarizer v1.1.0 - MIT license */
 
 'use strict';
 
@@ -15,7 +15,9 @@ var _ = require('lodash')
  */
 var WordFormSimilarity = function (words1, words2) {
   var same_words = _.intersection(words1, words2)
-  return 2 * same_words.length/(words1.length + words2.length)
+  var result = 2 * same_words.length/(words1.length + words2.length)
+  result = (isNaN(result)) ? 0 : result
+  return result
 }
 
 /**

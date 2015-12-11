@@ -27,7 +27,7 @@ var distance = function (vector) {
 
 var cos = function (v1, v2) {
   var dot = mathjs.dot(v1, v2)
-  return dot / (distance(v1) * distance(v1))
+  return (dot+0.01) / ((distance(v1)*distance(v2))+0.01)
 }
 
 var getBigram = function (words) {
@@ -72,9 +72,15 @@ var getVC = function (words, join_words) {
 }
 
 var WordOrderSimilarity = function (words1, words2) {
+  if (_.isEmpty(words1) || _.isEmpty(words2) || words2.length==1)
+    return 0
+
   var c1 = 4/10
   var c2 = 3/10
   var c3 = 3/10
+
+  words1 = (words1.length==0) ? [''] : words1
+  words2 = (words2.length==0) ? [''] : words2
 
   var join_words = _.uniq(words1.concat(words2))
   var va1 = getVA(words1, join_words)

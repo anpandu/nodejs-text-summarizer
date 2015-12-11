@@ -1,4 +1,4 @@
-/*! nodejs-text-summarizer v1.0.0 - MIT license */
+/*! nodejs-text-summarizer v1.1.0 - MIT license */
 
 'use strict';
 
@@ -16,11 +16,15 @@ var natural = require('natural')
  */
 
 var similarity = function (word1, word2) {
+  if (_.isEmpty(word1) || _.isEmpty(word2))
+    return 0
   return natural.DiceCoefficient(word1, word2)
 }
 
 
 var wssim = function (word, words) {
+  if (_.isEmpty(words))
+    return 0
   var max_similarity = _.chain(words)
     .map(function (w) { return similarity(word, w) })
     .max()
@@ -28,16 +32,22 @@ var wssim = function (word, words) {
   return max_similarity
 }
 
-var WordSemanticSimilarity = function (arr1, arr2) {
-  var sum_wssim = _.chain(arr1)
-    .map(function (word1) { return wssim(word1, arr2) })
+var WordSemanticSimilarity = function (words1, words2) {
+
+  var sum_wssim = _.chain(words1)
+    .map(function (word1) { return wssim(word1, words2) })
     .reduce(function(total, n) { return total + n })
     .value()
-  var sum_wssim2 = _.chain(arr2)
-    .map(function (word2) { return wssim(word2, arr1) })
+  var sum_wssim2 = _.chain(words2)
+    .map(function (word2) { return wssim(word2, words1) })
     .reduce(function(total, n) { return total + n })
     .value()
-  var result = (sum_wssim + sum_wssim2) / (arr1.length + arr2.length)
+  
+  sum_wssim = (sum_wssim) ? sum_wssim : 0
+  sum_wssim2 = (sum_wssim2) ? sum_wssim2 : 0
+
+  var result = (sum_wssim + sum_wssim2) / (words1.length + words2.length)
+  result = ((words1.length + words2.length) == 0) ? 0 : result
   return result
 }
 
