@@ -26,6 +26,7 @@ var sumID = function (content) {
 
   var sentences = tokenizer.splitSentence(text)
   
+  Processor.setLanguage('ID')
   sentences = Processor.addWords(sentences)
   sentences = Processor.addWordFormSimilarity(sentences)
   sentences = Processor.addWordSemanticSimilarity(sentences)

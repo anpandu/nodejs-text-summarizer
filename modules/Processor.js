@@ -23,10 +23,14 @@ var sim3 = require('./WordOrderSimilarity.js')
  */
 var Processor = function () {}
 
-Processor.prototype.LANG = Helper.LANG.ID
+Processor.prototype.LANG = Helper.LANG.EN
 Processor.prototype.lambda1 = 0.4
 Processor.prototype.lambda2 = 0.1 
 Processor.prototype.lambda3 = 0.5
+
+Processor.prototype.setLanguage = function(lang) {
+  Processor.prototype.LANG = lang
+}
 
 Processor.prototype.addWords = function(sentences) {
   var sentences = _.chain(sentences)
