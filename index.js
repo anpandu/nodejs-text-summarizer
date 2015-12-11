@@ -18,7 +18,7 @@ var Processor = require('./modules/Processor.js')
  * @api public
  */
 
-var topicID = function (content) {
+var sumID = function (content) {
   
   var text = content
   text = Cleaner.replaceNonASCII(text, ' ')
@@ -46,5 +46,5 @@ var topicID = function (content) {
  */
 
 module.exports = {
-  TopicID: topicID
+  ID: sumID
 }
