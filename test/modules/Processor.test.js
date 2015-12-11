@@ -141,4 +141,15 @@ describe('Processor', function () {
     assert(_.isEqual(result2.length, scored_sentences.length))
   })
 
+  it('getJoinedSentences', function () {
+    var PRO = require('../../modules/Processor.js')
+    PRO.setLanguage('ID')
+
+    var best_sentences = [{"text":"Mengenai solusi perlintasan sebidang, Jonan mengatakan pilihan solusinya ada dua apakah rel mau ditaruh di atas atau dibuat underpass.","s_id":7,"word_form_similarity":2.4125194522253346,"word_semantic_similarity":5.060707927887952,"word_order_similarity":1.846148073303909,"total_score":2.620701161899454},{"text":"Menhub menyebutkan saat ini terdapat paling tidak 200 perlintasan kereta api sebidang.","s_id":11,"word_form_similarity":2.130482262835204,"word_semantic_similarity":4.667390226324007,"word_order_similarity":2.3624904097212283,"total_score":2.407373873872687},{"text":"Presiden Joko Widodo (Jokowi) meminta Kemenhub dan Pemprov DKI Jakarta berkoordinasi mencegah kecelakaan di perlintasan kereta api seperti yang terjadi pada Minggu pagi (6/12) di daerah Angke Jakarta Barat.","s_id":1,"word_form_similarity":2.1856561818361477,"word_semantic_similarity":4.641290591891664,"word_order_similarity":1.7724121082904407,"total_score":2.3898952154871287}]
+    var ans = 'Presiden Joko Widodo (Jokowi) meminta Kemenhub dan Pemprov DKI Jakarta berkoordinasi mencegah kecelakaan di perlintasan kereta api seperti yang terjadi pada Minggu pagi (6/12) di daerah Angke Jakarta Barat. Mengenai solusi perlintasan sebidang, Jonan mengatakan pilihan solusinya ada dua apakah rel mau ditaruh di atas atau dibuat underpass. Menhub menyebutkan saat ini terdapat paling tidak 200 perlintasan kereta api sebidang.'
+    
+    var result = PRO.getJoinedSentences(best_sentences)
+    assert(_.isEqual(result, ans))
+  })
+
 })

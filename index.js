@@ -33,8 +33,9 @@ var sumID = function (content) {
   sentences = Processor.deleteWords(sentences)
 
   sentences = Processor.getNBest(1, sentences)
+  var summary = Processor.getJoinedSentences(sentences)
   if (sentences.length>0)
-    return sentences[0]['text']
+    return summary
   else
     return ''
 }
@@ -54,8 +55,9 @@ var sumEN = function (content) {
   sentences = Processor.deleteWords(sentences)
 
   sentences = Processor.getNBest(1, sentences)
+  var summary = Processor.getJoinedSentences(sentences)
   if (sentences.length>0)
-    return sentences[0]['text']
+    return summary
   else
     return ''
 }
