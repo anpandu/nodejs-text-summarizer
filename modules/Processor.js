@@ -116,6 +116,12 @@ Processor.prototype.deleteWords = function(sentences) {
   return sentences
 }
 
+Processor.prototype.getNBest = function(n, scored_sentences) {
+  var ranked_sentences = _.chain(scored_sentences).sortBy(function(a) { return -1*a['total_score'] }).value()
+  var best_sentences = _.slice(ranked_sentences, 0, n)
+  return best_sentences
+}
+
 /**
  * Module exports
  */

@@ -32,9 +32,9 @@ var sumID = function (content) {
   sentences = Processor.addTotalScore(sentences)
   sentences = Processor.deleteWords(sentences)
 
-  sentences = _.chain(sentences).sortBy(function(a) { return a['total_score'] }).value()
+  sentences = Processor.getNBest(1, sentences)
   if (sentences.length>0)
-    return sentences[sentences.length-1]['text']
+    return sentences[0]['text']
   else
     return ''
 }
@@ -53,9 +53,9 @@ var sumEN = function (content) {
   sentences = Processor.addTotalScore(sentences)
   sentences = Processor.deleteWords(sentences)
 
-  sentences = _.chain(sentences).sortBy(function(a) { return a['total_score'] }).value()
+  sentences = Processor.getNBest(1, sentences)
   if (sentences.length>0)
-    return sentences[sentences.length-1]['text']
+    return sentences[0]['text']
   else
     return ''
 }
