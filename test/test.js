@@ -1,7 +1,12 @@
 var expect = require('chai').expect
+var assert = require('assert')
+var _ = require('lodash')
+var index = require('../topic.js')
 
-describe('topic()', function () {
-    it('does something', function () {
-        expect(true).to.equal(true)
-    })
+describe('MAIN', function () {
+
+  it('has TopicID', function () {
+    assert(!_.isUndefined(index.TopicID), 'TopicID not found')
+  })
+
 })
