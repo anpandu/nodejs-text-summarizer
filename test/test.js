@@ -1,7 +1,12 @@
-var expect = require('chai').expect;
+var expect = require('chai').expect
+var assert = require('assert')
+var _ = require('lodash')
+var index = require('../index.js')
 
-describe('topic()', function () {
-    it('does something', function () {
-        expect(true).to.equal(false);
-    });
-});
+describe('MAIN', function () {
+
+  it('has ID', function () {
+    assert(!_.isUndefined(index.ID), 'ID not found')
+  })
+
+})

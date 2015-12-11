@@ -1,8 +1,8 @@
 {
-  "name": "topic",
-  "description": "",
-  "version": "0.0.0",
-  "main": "topic.js",
+  "name": "nodejs-text-summarizer",
+  "description": "Text summarization based on sentence extraction for nodejs",
+  "version": "1.0.0",
+  "main": "index.js",
   "devDependencies": {
     "chai": "*",
     "mocha": "*"
@@ -11,9 +11,10 @@
     "test": "mocha --no-timeouts --recursive"
   },
   "dependencies": {
-    "bluebird": "^3.0.6",
     "lodash": "^3.10.1",
+    "mathjs": "^2.5.0",
     "nalapa": "^1.7.0",
+    "natural": "^0.2.1",
     "underscore.string": "^3.2.2"
   }
 }
