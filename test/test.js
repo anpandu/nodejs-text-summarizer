@@ -9,4 +9,8 @@ describe('MAIN', function () {
     assert(!_.isUndefined(index.ID), 'ID not found')
   })
 
+  it('has EN', function () {
+    assert(!_.isUndefined(index.EN), 'EN not found')
+  })
+
 })
