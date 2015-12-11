@@ -1,4 +1,4 @@
-/*! topic v0.0.0 - MIT license */
+/*! nodejs-text-summarizer v1.0.0 - MIT license */
 
 'use strict';
 
