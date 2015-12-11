@@ -24,19 +24,21 @@ var sim3 = require('./WordOrderSimilarity.js')
 var Processor = function () {}
 
 Processor.prototype.LANG = Helper.LANG.EN
-Processor.prototype.lambda1 = 0.4
+Processor.prototype.lambda1 = 0.8
 Processor.prototype.lambda2 = 0.1 
-Processor.prototype.lambda3 = 0.5
+Processor.prototype.lambda3 = 0.1
 
 Processor.prototype.setLanguage = function(lang) {
   Processor.prototype.LANG = lang
 }
 
 Processor.prototype.addWords = function(sentences) {
+  var count = 0
   var sentences = _.chain(sentences)
     .map(function (sentence) {
       var res = {}
       res['text'] = sentence
+      res['s_id'] = count
       res['words'] = tokenizer.tokenize(sentence)
       res['words'] = _.chain(res['words'])
         .filter(function (word) { return !Helper.isStopWord(Processor.prototype.LANG, word)})
@@ -44,6 +46,7 @@ Processor.prototype.addWords = function(sentences) {
         .map(function (word) { return s(word).toLowerCase().value() })
         .value()
       res['words'] = _.uniq(res['words'])
+      count += 1
       return res
     })
     .value()

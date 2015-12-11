@@ -33,7 +33,6 @@ var sumID = function (content) {
   sentences = Processor.deleteWords(sentences)
 
   sentences = _.chain(sentences).sortBy(function(a) { return a['total_score'] }).value()
-  console.log(sentences)
   if (sentences.length>0)
     return sentences[sentences.length-1]['text']
   else
@@ -55,7 +54,6 @@ var sumEN = function (content) {
   sentences = Processor.deleteWords(sentences)
 
   sentences = _.chain(sentences).sortBy(function(a) { return a['total_score'] }).value()
-  console.log(sentences)
   if (sentences.length>0)
     return sentences[sentences.length-1]['text']
   else
