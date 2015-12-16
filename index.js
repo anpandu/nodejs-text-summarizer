@@ -18,48 +18,39 @@ var Processor = require('./modules/Processor.js')
  * @api public
  */
 
-var sumID = function (content) {
+var summarizer = function (content, opt) {
+
+  var n = 1
+  var lang = 'EN'
+  var isRaw = false
+
+  if (!_.isUndefined(opt)) {
+    n = (_.isUndefined(opt.n)) ? n : opt.n
+    lang = (_.isUndefined(opt.lang)) ? lang : opt.lang
+    isRaw = (_.isUndefined(opt.raw)) ? raw : opt.raw
+  }
+
   var text = content
   text = Cleaner.replaceNonASCII(text, ' ')
   text = Cleaner.fixDotBetweenSentences(text)
   var sentences = tokenizer.splitSentence(text)
   
-  Processor.setLanguage('ID')
+  Processor.setLanguage(lang)
+
   sentences = Processor.addWords(sentences)
   sentences = Processor.addWordFormSimilarity(sentences)
   sentences = Processor.addWordSemanticSimilarity(sentences)
   sentences = Processor.addWordOrderSimilarity(sentences)
   sentences = Processor.addTotalScore(sentences)
   sentences = Processor.deleteWords(sentences)
+  sentences = Processor.getNBest(n, sentences)
 
-  sentences = Processor.getNBest(1, sentences)
-  var summary = Processor.getJoinedSentences(sentences)
-  if (sentences.length>0)
-    return summary
-  else
-    return ''
-}
-
-var sumEN = function (content) {
-  var text = content
-  text = Cleaner.replaceNonASCII(text, ' ')
-  text = Cleaner.fixDotBetweenSentences(text)
-  var sentences = tokenizer.splitSentence(text)
-  
-  Processor.setLanguage('EN')
-  sentences = Processor.addWords(sentences)
-  sentences = Processor.addWordFormSimilarity(sentences)
-  sentences = Processor.addWordSemanticSimilarity(sentences)
-  sentences = Processor.addWordOrderSimilarity(sentences)
-  sentences = Processor.addTotalScore(sentences)
-  sentences = Processor.deleteWords(sentences)
-
-  sentences = Processor.getNBest(1, sentences)
-  var summary = Processor.getJoinedSentences(sentences)
-  if (sentences.length>0)
-    return summary
-  else
-    return ''
+  if (isRaw)
+    return sentences
+  else {
+    var summary = Processor.getJoinedSentences(sentences)
+    return (sentences.length>0) ? summary : ''
+  }
 }
 
 
@@ -67,7 +58,4 @@ var sumEN = function (content) {
  * Module exports
  */
 
-module.exports = {
-  ID: sumID,
-  EN: sumEN
-}
+module.exports = summarizer
