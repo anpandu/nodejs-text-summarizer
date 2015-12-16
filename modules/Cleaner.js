@@ -1,4 +1,4 @@
-/*! nodejs-text-summarizer v1.0.0 - MIT license */
+/*! nodejs-text-summarizer v2.0.0 - MIT license */
 
 'use strict';
 
@@ -20,7 +20,7 @@ Cleaner.prototype.replaceNonASCII = function(text, word) {
 
 Cleaner.prototype.fixDotBetweenSentences = function(text) {
   return text
-  	.replace(/([a-z0-9\"]\.)([A-Z\"])/g, "$1 $2")
+  	.replace(/([a-z0-9\"\)]\.)([A-Z\"])/g, "$1 $2")
   	.replace(/([A-Z]\.)\"/g, "$1 \"")
 }
 

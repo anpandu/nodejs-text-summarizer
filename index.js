@@ -1,4 +1,4 @@
-/*! nodejs-text-summarizer v1.0.0 - MIT license */
+/*! nodejs-text-summarizer v2.0.0 - MIT license */
 
 'use strict';
 
@@ -18,48 +18,40 @@ var Processor = require('./modules/Processor.js')
  * @api public
  */
 
-var sumID = function (content) {
+var summarizer = function (content, opt) {
+
+  var n = 1
+  var lang = 'EN'
+  var isRaw = false
+
+  if (!_.isUndefined(opt)) {
+    n = (_.isUndefined(opt.n)) ? n : opt.n
+    lang = (_.isUndefined(opt.lang)) ? lang : opt.lang
+    isRaw = (_.isUndefined(opt.raw)) ? raw : opt.raw
+  }
+
   var text = content
   text = Cleaner.replaceNonASCII(text, ' ')
   text = Cleaner.fixDotBetweenSentences(text)
   var sentences = tokenizer.splitSentence(text)
   
-  Processor.setLanguage('ID')
-  sentences = Processor.addWords(sentences)
-  sentences = Processor.addWordFormSimilarity(sentences)
-  sentences = Processor.addWordSemanticSimilarity(sentences)
-  sentences = Processor.addWordOrderSimilarity(sentences)
-  sentences = Processor.addTotalScore(sentences)
-  sentences = Processor.deleteWords(sentences)
+  var processor = new Processor ()
+  processor.setLanguage(lang)
 
-  sentences = _.chain(sentences).sortBy(function(a) { return a['total_score'] }).value()
-  console.log(sentences)
-  if (sentences.length>0)
-    return sentences[sentences.length-1]['text']
-  else
-    return ''
-}
+  sentences = processor.addWords(sentences)
+  sentences = processor.addWordFormSimilarity(sentences)
+  sentences = processor.addWordSemanticSimilarity(sentences)
+  sentences = processor.addWordOrderSimilarity(sentences)
+  sentences = processor.addTotalScore(sentences)
+  sentences = processor.deleteWords(sentences)
+  sentences = processor.getNBest(n, sentences)
 
-var sumEN = function (content) {
-  var text = content
-  text = Cleaner.replaceNonASCII(text, ' ')
-  text = Cleaner.fixDotBetweenSentences(text)
-  var sentences = tokenizer.splitSentence(text)
-  
-  Processor.setLanguage('EN')
-  sentences = Processor.addWords(sentences)
-  sentences = Processor.addWordFormSimilarity(sentences)
-  sentences = Processor.addWordSemanticSimilarity(sentences)
-  sentences = Processor.addWordOrderSimilarity(sentences)
-  sentences = Processor.addTotalScore(sentences)
-  sentences = Processor.deleteWords(sentences)
-
-  sentences = _.chain(sentences).sortBy(function(a) { return a['total_score'] }).value()
-  console.log(sentences)
-  if (sentences.length>0)
-    return sentences[sentences.length-1]['text']
-  else
-    return ''
+  if (isRaw)
+    return sentences
+  else {
+    var summary = processor.getJoinedSentences(sentences)
+    return (sentences.length>0) ? summary : ''
+  }
 }
 
 
@@ -67,7 +59,4 @@ var sumEN = function (content) {
  * Module exports
  */
 
-module.exports = {
-  ID: sumID,
-  EN: sumEN
-}
+module.exports = summarizer

@@ -1,4 +1,4 @@
-/*! nodejs-text-summarizer v1.1.0 - MIT license */
+/*! nodejs-text-summarizer v2.0.0 - MIT license */
 
 'use strict';
 
@@ -24,19 +24,21 @@ var sim3 = require('./WordOrderSimilarity.js')
 var Processor = function () {}
 
 Processor.prototype.LANG = Helper.LANG.EN
-Processor.prototype.lambda1 = 0.4
+Processor.prototype.lambda1 = 0.8
 Processor.prototype.lambda2 = 0.1 
-Processor.prototype.lambda3 = 0.5
+Processor.prototype.lambda3 = 0.1
 
 Processor.prototype.setLanguage = function(lang) {
   Processor.prototype.LANG = lang
 }
 
 Processor.prototype.addWords = function(sentences) {
+  var count = 0
   var sentences = _.chain(sentences)
     .map(function (sentence) {
       var res = {}
       res['text'] = sentence
+      res['s_id'] = count
       res['words'] = tokenizer.tokenize(sentence)
       res['words'] = _.chain(res['words'])
         .filter(function (word) { return !Helper.isStopWord(Processor.prototype.LANG, word)})
@@ -44,6 +46,7 @@ Processor.prototype.addWords = function(sentences) {
         .map(function (word) { return s(word).toLowerCase().value() })
         .value()
       res['words'] = _.uniq(res['words'])
+      count += 1
       return res
     })
     .value()
@@ -113,7 +116,22 @@ Processor.prototype.deleteWords = function(sentences) {
   return sentences
 }
 
+Processor.prototype.getNBest = function(n, scored_sentences) {
+  var ranked_sentences = _.chain(scored_sentences).sortBy(function(a) { return -1*a['total_score'] }).value()
+  var best_sentences = _.slice(ranked_sentences, 0, n)
+  return best_sentences
+}
+
+Processor.prototype.getJoinedSentences = function(best_sentences) {
+  var text = _.chain(best_sentences)
+    .sortBy(function(a) { return a['s_id'] })
+    .pluck('text')
+    .value()
+    .join(' ')
+  return text
+}
+
 /**
  * Module exports
  */
-module.exports = new Processor ();
+module.exports = Processor;
