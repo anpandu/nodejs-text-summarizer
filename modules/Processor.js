@@ -1,4 +1,4 @@
-/*! nodejs-text-summarizer v1.1.0 - MIT license */
+/*! nodejs-text-summarizer v2.0.0 - MIT license */
 
 'use strict';
 
