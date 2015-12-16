@@ -134,4 +134,4 @@ Processor.prototype.getJoinedSentences = function(best_sentences) {
 /**
  * Module exports
  */
-module.exports = new Processor ();
+module.exports = Processor;

@@ -35,20 +35,21 @@ var summarizer = function (content, opt) {
   text = Cleaner.fixDotBetweenSentences(text)
   var sentences = tokenizer.splitSentence(text)
   
-  Processor.setLanguage(lang)
+  var processor = new Processor ()
+  processor.setLanguage(lang)
 
-  sentences = Processor.addWords(sentences)
-  sentences = Processor.addWordFormSimilarity(sentences)
-  sentences = Processor.addWordSemanticSimilarity(sentences)
-  sentences = Processor.addWordOrderSimilarity(sentences)
-  sentences = Processor.addTotalScore(sentences)
-  sentences = Processor.deleteWords(sentences)
-  sentences = Processor.getNBest(n, sentences)
+  sentences = processor.addWords(sentences)
+  sentences = processor.addWordFormSimilarity(sentences)
+  sentences = processor.addWordSemanticSimilarity(sentences)
+  sentences = processor.addWordOrderSimilarity(sentences)
+  sentences = processor.addTotalScore(sentences)
+  sentences = processor.deleteWords(sentences)
+  sentences = processor.getNBest(n, sentences)
 
   if (isRaw)
     return sentences
   else {
-    var summary = Processor.getJoinedSentences(sentences)
+    var summary = processor.getJoinedSentences(sentences)
     return (sentences.length>0) ? summary : ''
   }
 }
