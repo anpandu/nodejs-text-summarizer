@@ -27,7 +27,7 @@ var summarizer = function (content, opt) {
   if (!_.isUndefined(opt)) {
     n = (_.isUndefined(opt.n)) ? n : opt.n
     lang = (_.isUndefined(opt.lang)) ? lang : opt.lang
-    isRaw = (_.isUndefined(opt.raw)) ? raw : opt.raw
+    isRaw = (_.isUndefined(opt.raw)) ? isRaw : opt.raw
   }
 
   var text = content
