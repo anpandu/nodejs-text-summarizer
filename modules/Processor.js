@@ -125,7 +125,7 @@ Processor.prototype.getNBest = function(n, scored_sentences) {
 Processor.prototype.getJoinedSentences = function(best_sentences) {
   var text = _.chain(best_sentences)
     .sortBy(function(a) { return a['s_id'] })
-    .pluck('text')
+    .map('text')
     .value()
     .join(' ')
   return text
