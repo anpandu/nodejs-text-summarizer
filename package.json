@@ -1,7 +1,7 @@
 {
   "name": "nodejs-text-summarizer",
   "description": "Text summarization based on sentence extraction for nodejs",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "homepage": "anpandu.com",
   "repository": "anpandu/nodejs-text-summarizer",
   "author": {
@@ -23,11 +23,11 @@
     "test": "mocha --no-timeouts --recursive"
   },
   "dependencies": {
-    "lodash": "^3.10.1",
-    "mathjs": "^2.5.0",
-    "nalapa": "^1.7.0",
-    "natural": "^0.2.1",
-    "underscore.string": "^3.2.2"
+    "lodash": "^4.6.1",
+    "mathjs": "^3.0.0",
+    "nalapa": "^1.9.3",
+    "natural": "^0.4.0",
+    "underscore.string": "^3.3.4"
   },
   "license": "MIT"
 }
