@@ -1,15 +1,20 @@
 {
   "name": "nodejs-text-summarizer",
   "description": "Text summarization based on sentence extraction for nodejs",
-  "version": "2.0.1",
-  "homepage": "pandu.ml",
+  "version": "2.0.2",
+  "homepage": "anpandu.com",
   "repository": "anpandu/nodejs-text-summarizer",
   "author": {
     "name": "Pandu",
     "email": "anpandumail@gmail.com",
-    "url": "pandu.ml"
+    "url": "anpandu.com"
   },
   "main": "index.js",
+  "keywords": [
+    "machine learning",
+    "natural language processing",
+    "summarizer"
+  ],
   "devDependencies": {
     "chai": "*",
     "mocha": "*"
