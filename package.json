@@ -23,10 +23,10 @@
     "test": "mocha --no-timeouts --recursive"
   },
   "dependencies": {
-    "lodash": "^4.6.1",
-    "mathjs": "^3.0.0",
-    "nalapa": "^1.9.3",
-    "natural": "^0.4.0",
+    "lodash": "^4.17.4",
+    "mathjs": "^3.14.2",
+    "nalapa": "^1.11.0",
+    "natural": "^0.5.4",
     "underscore.string": "^3.3.4"
   },
   "license": "MIT"
