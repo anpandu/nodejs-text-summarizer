@@ -71,6 +71,14 @@ From the repo root:
 npm test
 ```
 
+## Common Error and Solution
+
+Go to node_modules/natural/lib/natural/brill_pos_tagger/lib/Brill_POS_Tagger.js
+
+replace comment logger.setLevel('WARN');
+
+And add logger.level = 'DEBUG';
+
 ## License
 
 MIT © [Ananta Pandu](pandu.ml)
